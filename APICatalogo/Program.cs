@@ -1,4 +1,6 @@
 using APICatalogo.Configuration;
+using AspNetCore.Scalar;
+using Scalar.AspNetCore;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +22,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.MapScalarApiReference();
+    app.UseScalar(options =>
+    {
+        options.UseTheme(Theme.Default);
+        options.RoutePrefix = "api-docs";
+    });
 }
 
 app.UseHttpsRedirection();
